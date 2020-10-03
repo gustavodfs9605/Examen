@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Examen 1</string>
+    <string-array name="list_tipos">
+        <item>Instrumentos</item>
+        <item>Accesorios</item>
+        <item>Amplificadores</item>
+        <item>Otros</item>
+    </string-array>
+</resources>
