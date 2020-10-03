@@ -95,15 +95,26 @@ public class Actualizar extends AppCompatActivity {
             }
         }
 
+        public boolean validarDatos(){
+            return  ((ExpReg.validarString(ed_txt_marca.getText().toString())) &&
+                    (ExpReg.validarString(ed_txt_serieEd.getText().toString())) &&
+                    (ExpReg.validarFloat(ed_txt_precio.getText().toString())) &&
+                    (ExpReg.validarFloat(ed_txt_descuento.getText().toString())))? true : false;
+        }
+
         public void guardar(View v) {
-            productos.get(indice).setMarca(ed_txt_marca.getText().toString());
-            productos.get(indice).setSerie(ed_txt_serieEd.getText().toString());
-            productos.get(indice).setTipo(sp_tipos.getSelectedItem().toString());
-            productos.get(indice).setPrecio(Float.parseFloat(ed_txt_precio.getText().toString()));
-            productos.get(indice).setDescuento(Float.parseFloat(ed_txt_descuento.getText().toString()));
-            btn_guardar.setClickable(false);
-            formulario.setVisibility(View.INVISIBLE);
-            Toast.makeText(v.getContext(),"El producto fue modificado!",Toast.LENGTH_SHORT).show();
+            if(validarDatos()) {
+                productos.get(indice).setMarca(ed_txt_marca.getText().toString());
+                productos.get(indice).setSerie(ed_txt_serieEd.getText().toString());
+                productos.get(indice).setTipo(sp_tipos.getSelectedItem().toString());
+                productos.get(indice).setPrecio(Float.parseFloat(ed_txt_precio.getText().toString()));
+                productos.get(indice).setDescuento(Float.parseFloat(ed_txt_descuento.getText().toString()));
+                btn_guardar.setClickable(false);
+                formulario.setVisibility(View.INVISIBLE);
+                Toast.makeText(v.getContext(),"El producto fue modificado!",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(v.getContext(),"Datos incorrectos!",Toast.LENGTH_SHORT).show();
+            }
         }
 
         public void regresar(View v) {

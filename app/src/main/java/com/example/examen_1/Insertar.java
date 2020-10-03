@@ -17,6 +17,7 @@ public class Insertar extends AppCompatActivity {
     private ArrayList<Producto> productos;
     private ConfiguracionDeBotones configuracionDeBotones;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,20 +75,31 @@ public class Insertar extends AppCompatActivity {
             }
         }
 
+        public boolean validarDatos(){
+            return  ((ExpReg.validarString(ed_txt_marca.getText().toString())) &&
+                     (ExpReg.validarString(ed_txt_serie.getText().toString())) &&
+                     (ExpReg.validarFloat(ed_txt_precio.getText().toString())) &&
+                     (ExpReg.validarFloat(ed_txt_descuento.getText().toString())))? true : false;
+        }
+
         public void guardar( View view ){
-            Producto producto = new Producto();
-            producto.setMarca(ed_txt_marca.getText().toString());
-            producto.setSerie(ed_txt_serie.getText().toString());
-            producto.setPrecio(Float.parseFloat(ed_txt_precio.getText().toString()));
-            producto.setDescuento(Float.parseFloat(ed_txt_descuento.getText().toString()));
-            producto.setTipo(sp_tipos.getSelectedItem().toString());
-            productos.add(producto);
-            txt_v_contador.setText(""+productos.size());
-            ed_txt_marca.setText("");
-            ed_txt_serie.setText("");
-            ed_txt_descuento.setText("");
-            ed_txt_precio.setText("");
-            Toast.makeText(view.getContext(),"Producto agregado", Toast.LENGTH_SHORT).show();
+            if(validarDatos()){
+                Producto producto = new Producto();
+                producto.setMarca(ed_txt_marca.getText().toString());
+                producto.setSerie(ed_txt_serie.getText().toString());
+                producto.setPrecio(Float.parseFloat(ed_txt_precio.getText().toString()));
+                producto.setDescuento(Float.parseFloat(ed_txt_descuento.getText().toString()));
+                producto.setTipo(sp_tipos.getSelectedItem().toString());
+                productos.add(producto);
+                txt_v_contador.setText(""+productos.size());
+                ed_txt_marca.setText("");
+                ed_txt_serie.setText("");
+                ed_txt_descuento.setText("");
+                ed_txt_precio.setText("");
+                Toast.makeText(view.getContext(),"Producto agregado", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(view.getContext(),"Datos no validos", Toast.LENGTH_SHORT).show();
+            }
         }
 
         public void regresar(View v) {
