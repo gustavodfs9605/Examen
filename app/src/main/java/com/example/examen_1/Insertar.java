@@ -12,7 +12,7 @@ public class Insertar extends AppCompatActivity {
 
     private Spinner sp_tipos;
     private Button btn_guardar, btn_act_main;
-    private EditText ed_txt_precio, ed_txt_descuento, ed_txt_marca;
+    private EditText ed_txt_precio, ed_txt_descuento, ed_txt_marca,ed_txt_serie;
     private TextView txt_v_contador;
     private ArrayList<Producto> productos;
     private ConfiguracionDeBotones configuracionDeBotones;
@@ -37,6 +37,7 @@ public class Insertar extends AppCompatActivity {
 
     public void configRecursos() {
         ed_txt_marca     = (EditText) findViewById(R.id.ed_txt_marca);
+        ed_txt_serie     = (EditText) findViewById(R.id.ed_txt_serie);
         ed_txt_precio    = (EditText) findViewById(R.id.ed_txt_precio);
         ed_txt_descuento = (EditText) findViewById(R.id.ed_txt_descuento);
         txt_v_contador   = (TextView) findViewById(R.id.txt_v_contador);
@@ -76,12 +77,14 @@ public class Insertar extends AppCompatActivity {
         public void guardar( View view ){
             Producto producto = new Producto();
             producto.setMarca(ed_txt_marca.getText().toString());
+            producto.setSerie(ed_txt_serie.getText().toString());
             producto.setPrecio(Float.parseFloat(ed_txt_precio.getText().toString()));
             producto.setDescuento(Float.parseFloat(ed_txt_descuento.getText().toString()));
             producto.setTipo(sp_tipos.getSelectedItem().toString());
             productos.add(producto);
             txt_v_contador.setText(""+productos.size());
             ed_txt_marca.setText("");
+            ed_txt_serie.setText("");
             ed_txt_descuento.setText("");
             ed_txt_precio.setText("");
             Toast.makeText(view.getContext(),"Producto agregado", Toast.LENGTH_SHORT).show();
